@@ -1,0 +1,4 @@
+{
+    "recommendations": ["ms-python.python", "ms-python.pylint", "ms-python.vscode-pylance", "github.copilot"],
+    "unwantedRecommendations": ["davidanson.vscode-markdownlint", "ms-azuretools.vscode-docker", "eamodio.gitlens"]
+}

@@ -63,3 +63,6 @@ bananananaspaj
 1 3 5 7
 1 3 5 7 9 12
 ```
+
+I need to detect when a task start, find number of different patterns and search for the patterns. All the information is in the same file so I need to figure when it a pattern task start, pattern and data.
+Output is written to a file where the position is the first posiontion of the pattern. It is case sensitive and first letter position is zero.

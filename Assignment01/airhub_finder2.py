@@ -1,6 +1,8 @@
-import math
+import os
+from math import radians, sin, cos, sqrt, atan2
 
 def read_coords_from_file(filename):
+    
     with open(filename, 'r') as f:
         coords = []
         while True:
@@ -17,38 +19,43 @@ def read_coords_from_file(filename):
                     coord_list.append([lat, lon])
             coords.append(coord_list)
         return coords
+    
+# BEGIN: 2j3b4k5l6m7n
 
-
-def haversine(lat1, lon1, lat2, lon2):
+def calculate_distance(coord1, coord2):
     R = 6371  # radius of the earth in km
-    dLat = math.radians(lat2 - lat1)
-    dLon = math.radians(lon2 - lon1)
-    a = math.sin(dLat / 2) * math.sin(dLat / 2) + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dLon / 2) * math.sin(dLon / 2)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-    d = R * c
-    return d
+    lat1, lon1 = coord1
+    lat2, lon2 = coord2
+    dlat = radians(lat2 - lat1)
+    dlon = radians(lon2 - lon1)
+    a = sin(dlat / 2) * sin(dlat / 2) + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon / 2) * sin(dlon / 2)
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    distance = R * c
+    return distance
 
 
-def find_closest_coordinate(coords_list):
-    min_distance = float('inf')
-    closest_coord = None
-    for coord1 in coords_list:
-        distance = 0
-        for coord2 in coords_list:
-            if coord1 != coord2:
-                distance += haversine(coord1[0], coord1[1], coord2[0], coord2[1])
-        if distance < min_distance:
-            min_distance = distance
-            closest_coord = coord1
-    return closest_coord
+def calculate_total_distance(coords):
+    total_distance = 0
+    for i, coord1 in enumerate(coords):
+        for j, coord2 in enumerate(coords):
+            if i < j:
+                distance = calculate_distance(coord1, coord2)
+                total_distance += distance
+    return total_distance
 
 
-def write_result_to_file(result, filename):
-    with open(filename, 'w') as f:
-        f.write(f"Closest coordinate: {result}\n")
 
 
 if __name__ == '__main__':
+    if os.path.exists('result_ass1.txt'):
+        os.remove('result_ass1.txt')
     coords = read_coords_from_file('airlinehub.in')
-    closest_coord = find_closest_coordinate(coords[0])
-    write_result_to_file(closest_coord, 'result.txt')
+    for coord_set in coords:
+        for coord in coord_set:
+            print(coord)
+            print(calculate_total_distance(coord_set))
+        # for i, coord1 in enumerate(coord_set):
+        #     for j, coord2 in enumerate(coord_set):
+        #         if i < j:
+        #             distance = calculate_distance(coord1, coord2)
+        #             print(f"Distance between {coord1} and {coord2}: {distance:.2f} km")

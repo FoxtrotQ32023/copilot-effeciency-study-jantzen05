@@ -13,9 +13,15 @@ for line in LINES:
     if line.isdigit():
         PATTERN_LINES = int(line)
         pattern_list= []
+    # The total length of all patterns in a test case is no more than 100.000.
     elif len(pattern_list) < PATTERN_LINES:
+        if len(line) > 100000:
+            raise TypeError("pattern to long")
         pattern_list.append(line)
+
     else:
+        if len(line) > 200000:
+            raise TypeError("input line to long")
         for pattern in pattern_list:
             iter = re.finditer(pattern, line)
             for m in iter:

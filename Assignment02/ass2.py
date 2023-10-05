@@ -22,6 +22,4 @@ for line in LINES:
                 RESULT_FILE.write(str(m.start()))
                 RESULT_FILE.write(" ")
             RESULT_FILE.write("\n")
-            
-            
 RESULT_FILE.close()

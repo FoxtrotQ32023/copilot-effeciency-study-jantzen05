@@ -33,3 +33,9 @@ Your output should always contain two digits after the decimal point.
 3.20 -15.00
 52.31 4.76
 ```
+
+Find the airport that best serves as a hub by calculating the distance between the airport and select the one with the lowest total distance.
+Remember to add filters to lat and lon from input file.
+
+--
+Change scope to find the airport with the longest distance and select the first from then list.

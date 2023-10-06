@@ -60,6 +60,6 @@ if __name__ == '__main__':
         #write airhub result to file and format float with 2 decimal places
         result = find_airhub(coord_set)
         with open("result_ass1.txt", "a") as f:
-            f.write("{:.2f}, {:.2f}\n".format(result[0], result[1]))
+            f.write("{:.2f} {:.2f}\n".format(result[0], result[1]))
         # print result list with 2 decimal places
-        print("{:.2f}, {:.2f}".format(result[0], result[1]))
+        print("{:.2f} {:.2f}".format(result[0], result[1]))
